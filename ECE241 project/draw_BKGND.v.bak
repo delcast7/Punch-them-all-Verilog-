@@ -1,0 +1,44 @@
+module draw_BKGND (xPosition, yPosition, colourIn, xCounter, yCounter, resetn, load_x, load_y, clock, x, y,colourOut);
+	input [7:0]xPosition;
+	input [6:0]yPosition;
+	input [2:0]colourIn;
+	input [9:0] xCounter, yCounter;
+	input resetn;
+	input load_x, load_y;
+	input clock;
+	
+	output reg [7:0]x;
+	output reg [6:0]y;
+	output reg [2:0]colourOut;
+	
+	//assign colourOut =  colourIn;
+	
+	
+	reg [7:0]xreg;
+	reg [6:0]yreg;
+	
+	//register X, Y
+	always@(posedge clock) begin
+		if(!resetn) begin
+         xreg <= 8'b0;
+			yreg <= 7'b0;
+			
+		end
+		else begin
+         if(load_x)
+				xreg <= xPosition;
+			if(load_y)
+				yreg <= yPosition;
+		end
+   end
+	
+	
+	always@(*) begin
+
+			x <= xreg + xCounter;
+			y <= yreg + yCounter;
+			colourOut =  colourIn;
+
+   end
+	
+endmodule

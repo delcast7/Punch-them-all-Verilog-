@@ -1,0 +1,20 @@
+Fitter Status : Successful - Mon Nov 14 18:10:26 2016
+Quartus Prime Version : 16.0.0 Build 211 04/27/2016 SJ Standard Edition
+Revision Name : projectECE241
+Top-level Entity Name : projectECE241
+Family : Cyclone V
+Device : 5CSEMA5F31C6
+Timing Models : Final
+Logic utilization (in ALMs) : 77 / 32,070 ( < 1 % )
+Total registers : 71
+Total pins : 50 / 457 ( 11 % )
+Total virtual pins : 0
+Total block memory bits : 427,008 / 4,065,280 ( 11 % )
+Total RAM Blocks : 53 / 397 ( 13 % )
+Total DSP Blocks : 0 / 87 ( 0 % )
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 1 / 6 ( 17 % )
+Total DLLs : 0 / 4 ( 0 % )

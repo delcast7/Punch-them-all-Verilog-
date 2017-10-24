@@ -1,0 +1,13 @@
+
+State Machine - |projectECE241|move_square_dpath:MS_D0|draw_square:DS0|draw_square_control:DS_C0|current_state
+Name current_state.S_LOAD_X current_state.DRAW_SQUARE current_state.S_LOAD_Y 
+current_state.S_LOAD_X 0 0 0 
+current_state.S_LOAD_Y 1 0 1 
+current_state.DRAW_SQUARE 1 1 0 
+
+State Machine - |projectECE241|move_square_control:MS_C0|current_state
+Name current_state.DOWN_LEFT current_state.UP_LEFT current_state.UP_RIGHT current_state.DOWN_RIGHT 
+current_state.DOWN_RIGHT 0 0 0 0 
+current_state.UP_RIGHT 0 0 1 1 
+current_state.UP_LEFT 0 1 0 1 
+current_state.DOWN_LEFT 1 0 0 1 

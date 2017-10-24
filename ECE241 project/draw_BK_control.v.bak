@@ -1,0 +1,87 @@
+module draw_square_control(
+	 input clk,
+    input resetn,
+
+    output reg  ld_x, ld_y, plotOut,
+	 
+	 output reg [14:0]counter
+    );
+	 
+	
+    reg [2:0] current_state, next_state;
+
+	 localparam	 S_LOAD_X        	= 3'd0,
+                S_LOAD_Y        	= 3'd1,
+                DRAW_SQUARE      = 3'd2;
+
+    
+    // Next state logic aka our state table
+    always@(*)
+    begin: state_table 
+            case (current_state)
+				
+					S_LOAD_X: 			next_state = S_LOAD_Y; 		// Loop in current state until go signal goes low
+					S_LOAD_Y: 			next_state = DRAW_SQUARE; 	// Loop in current state until go signal goes low
+					DRAW_SQUARE: 		next_state = S_LOAD_X;
+					 	 
+            default:    next_state = S_LOAD_X;
+        endcase
+    end // state_table
+   
+
+    // Output logic aka all of our datapath control signals
+	always @(*)
+	begin: enable_signals
+		// By default make all our signals 0
+		ld_x <= 1'b0;
+		ld_y <= 1'b0;
+		plotOut <= 1'b0;
+		
+		case (current_state)
+			
+			S_LOAD_X: begin
+				ld_x <= 1'b1;
+				end
+				
+			S_LOAD_Y: begin
+				ld_y <= 1'b1;
+				end
+
+			DRAW_SQUARE: begin
+				plotOut <= 1'b1;
+				end
+				
+				
+        // default:    // don't need default since we already made sure all of our outputs were assigned a value at the start of the always block
+        endcase
+    end // enable_signals
+	 
+	 
+	 wire counter_clear;
+	 
+	always @(posedge clk or negedge resetn)
+	begin
+		if (!resetn)
+			counter <= 4'd0;
+		else if (counter_clear)
+			counter <= 4'd0;
+		else
+		begin
+			counter <= counter + 1'b1;
+		end
+	end
+	assign counter_clear = (counter == 4'd15);
+	
+
+	
+   
+    // current_state registers
+    always@(posedge clk)
+    begin: state_FFs
+        if(!resetn)
+            current_state <= S_LOAD_X;
+				
+		  else
+            current_state <= next_state;
+    end // state_FFS
+endmodule
